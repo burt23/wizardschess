@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import GameContainer from './containers/GameContainer.js'
-import HomeContainer from './containers/HomeContainer.js'
 import Routes from './Routes.js'
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -12,9 +9,11 @@ class App extends Component {
       playerNames: {
         white: "",
         black: ""
-      }
+      },
+      gameMode: "single"
     }
     this.updatePlayerNames = this.updatePlayerNames.bind(this)
+    this.updateGameMode = this.updateGameMode.bind(this)
   }
 
   updatePlayerNames(names) {
@@ -23,14 +22,24 @@ class App extends Component {
       })
   }
 
+  updateGameMode(mode) {
+    this.setState({
+      gameMode: mode
+    })
+  }
+
   componentDidUpdate() {
-    console.log(this.state)
   }
 
   render() {
     return (
       <div className="App">
-        <Routes updatePlayerNames={this.updatePlayerNames} playerNames={this.state.playerNames}/>
+        <Routes 
+        updatePlayerNames={this.updatePlayerNames} 
+        updateGameMode={this.updateGameMode}
+        playerNames={this.state.playerNames}
+        gameMode={this.state.gameMode}
+        />
       </div>
     );
   }
